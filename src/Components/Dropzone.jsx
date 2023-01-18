@@ -1,5 +1,3 @@
-//*Dropzone.js*//
-
 import React from "react";
 import { useDropzone } from "React-dropzone";
 export default function Dropzone({ open }) {

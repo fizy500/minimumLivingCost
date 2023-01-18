@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import axios from "axios";
 import Banner from "./assets/banner.png";
 import Search from "./assets/search.svg";
 import Harry from "./assets/harry.png";
-import Logo from "./assets/logo.svg";
-import Location from "./assets/location.svg";
+
+// import Location from "./assets/location.svg";
 import Grid from "./assets/grid.png";
-import Phone from "./assets/phone.svg";
-import Fax from "./assets/fax.svg";
-import Facebook from "./assets/Facebook.svg";
-import Twitter from "./assets/Twitter.svg";
-import LinkedIn from "./assets/LinkedIn.svg";
-import Youtube from "./assets/Youtube.svg";
-import Instagram from "./assets/Instagram.svg";
-import Googleplus from "./assets/Googleplus.svg";
-import Pinterest from "./assets/Pinterest.svg";
-import Rss from "./assets/Rss.svg";
+// import Phone from "./assets/phone.svg";
+// import Fax from "./assets/fax.svg";
+// import Facebook from "./assets/Facebook.svg";
+// import Twitter from "./assets/Twitter.svg";
+// import LinkedIn from "./assets/LinkedIn.svg";
+// import Youtube from "./assets/Youtube.svg";
+// import Instagram from "./assets/Instagram.svg";
+// import Googleplus from "./assets/Googleplus.svg";
+// import Pinterest from "./assets/Pinterest.svg";
+// import Rss from "./assets/Rss.svg";
 import { LivingCostData } from "./LivingCostdata";
 import Card from "./Components/Card";
 import ListCard from "./Components/ListCard";
 import CityMap from "./Components/Map";
 import Dropzone from "./Components/Dropzone";
 import Nav from "./Components/NavBar";
+import Footer from "./Components/Footer";
 // import Grid from "./Components/grid";
+import { InView, useInView } from "react-intersection-observer";
 const currentYear = new Date().getFullYear();
 
 export default function Homepage() {
@@ -33,13 +35,41 @@ export default function Homepage() {
 
   // const clientId = "t_YxM0Taxyt2MhS4ve9lviN-EApwUOrVRjNIbJYD10w";
   const [images, setImages] = useState([]);
-  const ClientId = "bik77aZTtupvK59MFi32YM8S1_FH6Wmo_FQxTHAMFlc";
+  // const ClientId = "bik77aZTtupvK59MFi32YM8S1_FH6Wmo_FQxTHAMFlc";
   const url = "https://jsonplaceholder.typicode.com/photos";
   useEffect(() => {
     axios.get(url).then((response) => {
       setImages(response.data);
     });
   }, []);
+
+  const { ref, inView } = useInView();
+  const animation = useAnimation();
+  const animation2 = useAnimation();
+  useEffect(() => {
+    if (inView) {
+      animation.start({
+        x: 0,
+        transition: {
+          // type: "spring",
+          duration: 2,
+          bounce: 0.3,
+        },
+      });
+      animation2.start({
+        x: 0,
+        transition: {
+          // type: "spring",
+          duration: 2,
+          bounce: 0.3,
+        },
+      });
+    }
+    if (!inView) {
+      animation.start({ x:25 });
+      animation2.start({ x:-25 });
+    }
+  }, [inView]);
 
   return (
     <>
@@ -144,12 +174,18 @@ export default function Homepage() {
         </section>
 
         <section className=" px-4 font-fontinter">
-          <div className="lg:flex justify-between items-center lg:space-x-3 ">
-            <div className="basis-[50%]">
+          <div
+            className="lg:flex justify-between items-center lg:space-x-3 "
+            ref={ref}
+          >
+            <motion.div className="basis-[50%]" animate={animation}>
               {/* <Grid/> */}
               <img src={Grid} alt="" />
-            </div>
-            <div className="text-[#18191F] space-y-5 basis-[50%]">
+            </motion.div>
+            <motion.div
+              className="text-[#18191F] space-y-5 basis-[50%]"
+              animate={animation2}
+            >
               <h2 className="font-extrabold text-[40px] lg:w-[65%] ">
                 Flexibility and options to suit your lifestyle.
               </h2>
@@ -168,7 +204,7 @@ export default function Homepage() {
               >
                 Search Rooms
               </motion.button>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -297,7 +333,7 @@ export default function Homepage() {
                     required
                     className="block bg-[#F9F9F9] outline-none border-2 border-solid border-[#E6E6E6] rounded-[5px] pl-2 pr-[10rem] w-full py-[11px] mt-1"
                   >
-                    <option value="">Room Type *</option>
+                    <option value="">Room Type</option>
                     <option value="">Single</option>
                     <option value="">Double</option>
                     <option value="">Master</option>
@@ -337,7 +373,7 @@ export default function Homepage() {
                     required
                     className="block bg-[#F9F9F9] outline-none border-2 border-solid border-[#E6E6E6] rounded-[5px] pl-2 pr-[10rem] w-full py-[11px] mt-1"
                   >
-                    <option value="">Room Type *</option>
+                    <option value="">Room Type</option>
                     <option value="">Single</option>
                     <option value="">Double</option>
                     <option value="">Master</option>
@@ -420,129 +456,7 @@ export default function Homepage() {
         </section>
         <div></div>
       </main>
-      <footer className="px-4  ">
-        <hr className="h-[0.18rem] bg-[#F4511E]" />
-        <div className=" h-[200px] lg:grid grid-cols-2 py-8 px-4 mb-8">
-          <div className="flex justify-center items-center  ">
-            <img src={Logo} alt="" className="bg-black opacity-30" />
-          </div>
-          <div className=" flex flex-col justify-center items-baseline space-y-4  font-fontmontassistant">
-            <div className="flex space-x-5 font-normal text-[14px]">
-              <img src={Location} alt="" className="" />
-              <p className="">
-                345 Faulconer Drive, Suite 4 • Charlottesville, CA, 12345
-              </p>
-            </div>
-            <div className="flex space-x-12 lg:space-x-[8rem] ">
-              <div className="flex space-x-5 font-normal text-[14px]">
-                <img src={Phone} alt="" className="" />
-                <a href="tel" className="">
-                  (123) 456-7890
-                </a>
-              </div>
-
-              <div className="flex space-x-5 font-normal text-[14px]">
-                <img src={Fax} alt="" className="" />
-                <p className="">(123) 456-7890</p>
-              </div>
-            </div>
-
-            <div className="lg:flex items-center lg:space-x-7 py-8">
-              <p className="text-[#0A142F] font-normal text-sm op  opacity-50">
-                Social Media
-              </p>
-              <div className="grid grid-cols-4 lg:grid-cols-8 gap-6 lg:gap-0 items-baseline lg:space-x-7">
-                <motion.a
-                  href=""
-                  initial={{ x: 25 }}
-                  animate={{ x: 0 }}
-                  transition={{ delay: 2 }}
-                >
-                  <img src={Facebook} alt="Facebook-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  // initial={{ x: 40 }}
-                  // animate={{ x: 0 }}
-                  // transition={{ delay: 4 }}
-                >
-                  <img src={Twitter} alt="Twitter-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  initial={{ x: 50 }}
-                  animate={{ x: 0 }}
-                  transition={{ delay: 3 }}
-                >
-                  <img src={LinkedIn} alt="LinkedIn-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  // initial={{ x: 80 }}
-                  // animate={{ x: 0 }}
-                  // transition={{ delay: 4 }}
-                >
-                  <img src={Youtube} alt="Youtube-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  initial={{ x: 75 }}
-                  animate={{ x: 0 }}
-                  transition={{ delay: 4 }}
-                >
-                  <img src={Instagram} alt="Instagram-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  // initial={{ x: 120 }}
-                  // animate={{ x: 0 }}
-                  // transition={{ delay: 4 }}
-                >
-                  <img src={Googleplus} alt="Googleplus-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  initial={{ x: 100 }}
-                  animate={{ x: 0 }}
-                  transition={{ delay: 5 }}
-                >
-                  <img src={Pinterest} alt="Pinterest-logo" />
-                </motion.a>
-                <motion.a
-                  href=""
-                  initial={{ x: 120 }}
-                  animate={{ x: 0 }}
-                  transition={{ delay: 6 }}
-                >
-                  <img src={Rss} alt="Rss-logo" />
-                </motion.a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <nav className="lg:flex justify-between items-baseline pt-[6rem] pb-4 space-y-8 lg:space-y-0 border-t border-solid border-[#7BB9FC,opacity-20] px-4 font-fontinter">
-          <ul className="font-normal text-sm text-[#0A142F] uppercase  grid grid-cols-2 lg:grid-cols-5 gap-y-3 font-fontinter">
-            <a href="">
-              <li className="">About us</li>
-            </a>
-            <a href="">
-              <li className="">Contact us</li>
-            </a>
-            <a href="">
-              <li className="">Help</li>
-            </a>
-            <a href="">
-              <li className=" ">Privacy Policy</li>
-            </a>
-            <a href="">
-              <li className="ml-[12px]">Disclaimer</li>
-            </a>
-          </ul>
-          <p className="font-normal text-xs lg:text-sm text-[#0A142F] opacity-50 ">
-            Copyright &copy;{currentYear} Minimumlivingcost. All rights reserved
-          </p>
-        </nav>
-      </footer>
+      <Footer />
     </>
   );
 }
