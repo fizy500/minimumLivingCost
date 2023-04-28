@@ -14,7 +14,7 @@ function Nav() {
               <div className="flex-shrink-0">
                 <img className="" src={Logo} />
               </div>
-              <div className="hidden md:block">
+              <div className="hidden md:block border-4 border-transparent">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <a
                     href="#"
@@ -23,15 +23,16 @@ function Nav() {
                     Home
                   </a>
 
-                  <a href="#" className="text-white font-medium text-lg">
+                  <a href="#" className="text-white font-medium text-lg hover:border-b-2 border-solid border-white border-
+                  ">
                     Landlord
                   </a>
 
-                  <a href="#" className="text-white font-medium text-lg">
+                  <a href="#" className="text-white font-medium text-lg hover:border-b-2 border-solid border-white border-  ">
                     Tenants
                   </a>
 
-                  <a href="#" className="text-white font-medium text-lg">
+                  <a href="#" className="text-white font-medium text-lg hover:border-b-2 border-solid border-white ">
                     Contact Us
                   </a>
                 </div>

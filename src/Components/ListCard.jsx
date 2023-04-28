@@ -16,7 +16,7 @@ export default function ListCard(props) {
     const newOffset = (event.selected * itemsPerPage) % data.length;
     setItemOffset(newOffset);
   };
-
+            
   return (
     <div className="flex flex-col justify-center items-center space-y-20 font-fontdmsans">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-20  justify-center items-center px-4 lg:px-20  ">

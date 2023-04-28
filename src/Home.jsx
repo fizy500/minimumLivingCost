@@ -4,19 +4,7 @@ import axios from "axios";
 import Banner from "./assets/banner.png";
 import Search from "./assets/search.svg";
 import Harry from "./assets/harry.png";
-
-// import Location from "./assets/location.svg";
 import Grid from "./assets/grid.png";
-// import Phone from "./assets/phone.svg";
-// import Fax from "./assets/fax.svg";
-// import Facebook from "./assets/Facebook.svg";
-// import Twitter from "./assets/Twitter.svg";
-// import LinkedIn from "./assets/LinkedIn.svg";
-// import Youtube from "./assets/Youtube.svg";
-// import Instagram from "./assets/Instagram.svg";
-// import Googleplus from "./assets/Googleplus.svg";
-// import Pinterest from "./assets/Pinterest.svg";
-// import Rss from "./assets/Rss.svg";
 import { LivingCostData } from "./LivingCostdata";
 import Card from "./Components/Card";
 import ListCard from "./Components/ListCard";
@@ -24,7 +12,6 @@ import CityMap from "./Components/Map";
 import Dropzone from "./Components/Dropzone";
 import Nav from "./Components/NavBar";
 import Footer from "./Components/Footer";
-// import Grid from "./Components/grid";
 import { InView, useInView } from "react-intersection-observer";
 const currentYear = new Date().getFullYear();
 
@@ -66,8 +53,8 @@ export default function Homepage() {
       });
     }
     if (!inView) {
-      animation.start({ x:25 });
-      animation2.start({ x:-25 });
+      animation.start({ x: 25 });
+      animation2.start({ x: -25 });
     }
   }, [inView]);
 
